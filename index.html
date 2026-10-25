@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>IT-Шутки - Catindows</title>
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Шапка -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-d">D</span><span class="logo-o">O</span><span class="logo-s">S</span>
+        <span class="logo-text">IT-Шутки</span>
+      </div>
+      <div class="site-title">
+        <h1>База IT-шуток и мемов</h1>
+        <p>ПРОГРАММИРОВАНИЕ &gt;&gt; Юмор &gt;&gt; Классика</p>
+      </div>
+    </header>
+
+    <!-- Верхнее меню -->
+    <nav class="top-menu" id="mainMenu">
+      <a href="#" data-filter="all" class="active">Все</a>
+      <a href="#" data-filter="windows">Windows</a>
+      <a href="#" data-filter="linux">Linux</a>
+      <a href="#" data-filter="железо">Железо</a>
+      <a href="#" data-filter="баги">Баги</a>
+      <a href="#" data-filter="классика">Классика</a>
+      <a href="#" data-filter="программисты">Программисты</a>
+    </nav>
+
+    <!-- Основной макет -->
+    <div class="main-layout">
+      
+      <!-- ЛЕВАЯ КОЛОНКА -->
+      <aside class="sidebar">
+        
+        <!-- Блок аккаунта -->
+        <div class="sidebar-block" id="authBlock">
+          <div class="sidebar-title">Аккаунт</div>
+          
+          <!-- Кнопка вызова модалки (появляется после входа) -->
+          <div class="sidebar-content" id="addJokeBtnBlock" style="display: none; margin-bottom: 10px;">
+            <button id="btnShowAddJoke" style="width:100%; font-weight:bold; padding: 6px;">+ Добавить шутку</button>
+          </div>
+
+          <!-- Информация о пользователе -->
+          <div class="sidebar-content" id="authContent">
+            <p style="font-size: 11px; margin: 0;">Загрузка...</p>
+          </div>
+
+          <!-- Форма входа/регистрации (скрыта по умолчанию) -->
+                    <!-- Форма входа/регистрации -->
+          <div class="sidebar-content" id="authFormBlock" style="display: none; border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: 10px;">
+            
+            <!-- Поле для ника (видно только при регистрации) -->
+            <input type="text" id="authNickname" placeholder="Никнейм (только для регистрации)" style="width:100%; margin-bottom:5px; padding:4px; box-sizing:border-box; display: none;">
+            
+            <input type="email" id="authEmail" placeholder="Email" style="width:100%; margin-bottom:5px; padding:4px; box-sizing:border-box;">
+            <input type="password" id="authPassword" placeholder="Пароль" style="width:100%; margin-bottom:5px; padding:4px; box-sizing:border-box;">
+            
+            <button id="btnLogin" style="width:100%; margin-bottom:5px;">Войти</button>
+            <button id="btnRegister" style="width:100%;">Зарегистрироваться</button>
+            <p id="authError" style="color: red; font-size: 11px; margin-top: 5px;"></p>
+            
+            <!-- Кнопка переключения между Входом и Регистрацией -->
+            <p style="font-size: 11px; margin-top: 10px; text-align: center;">
+              <a href="#" id="toggleAuthMode" style="color: var(--link-color);">Нет аккаунта? Зарегистрироваться</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Блок поиска -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">Поиск</div>
+          <div class="sidebar-content">
+            <input type="search" id="search" placeholder="Ключевое слово...">
+            <button id="resetBtn">Сброс</button>
+          </div>
+        </div>
+        
+        <!-- Блок разделов -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">Разделы</div>
+          <div class="sidebar-content" id="tags">
+            <!-- Теги генерируются в script.js -->
+          </div>
+        </div>
+
+        <!-- Блок статистики -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">Статистика</div>
+          <div class="sidebar-content">
+            <p>Всего шуток: <span id="totalCount">0</span></p>
+            <p>Показано: <span id="visibleCount">0</span></p>
+            <button id="randomBtn" style="margin-top:10px; width:100%;">🎲 Случайная шутка</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ПРАВАЯ КОЛОНКА (Контент) -->
+      <main class="content">
+        <div class="content-header">
+          <h2>Список шуток</h2>
+        </div>
+        <div id="jokes" class="jokes-list">
+          <!-- Сюда рендерятся шутки -->
+        </div>
+      </main>
+
+    </div>
+
+    <!-- Подвал -->
+    <footer class="footer" id="mainFooter">
+	   <p style="margin: 20px 0;">
+        <button id="runawayBtn" class="runaway-btn">НЕ НАЖИМАТЬ!!!</button>
+      </p>
+      <p>© 2026 - <span id="currentYear">2026</span> Catindows Team.</p>
+      <p>Собрано с любовью к <code>segfault</code> и <code>BSOD</code>.</p>
+      <p>Проверка завершена. Все вирусы работают штатно.</p>
+      <p id="keyboardPrayer" style="margin-top: 10px; color: var(--link-color);">
+        (И опять молитва чтобы клава ожила а то зараза опять)
+      </p>
+    </footer>
+  </div>
+
+  <!-- Модальное окно добавления шутки -->
+  <div id="jokeModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Добавить шутку</h3>
+        <button id="btnCloseModal" class="modal-close">×</button>
+      </div>
+      <div class="modal-body">
+        <textarea id="newJokeText" placeholder="Текст шутки..."></textarea>
+        <input type="text" id="newJokeTags" placeholder="Теги (через запятую)">
+        <p id="addJokeStatus"></p>
+      </div>
+      <div class="modal-footer">
+        <button id="btnAddJoke">Отправить в облако</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Подключаем Firebase и логику -->
+  <script type="module" src="firebase.js"></script>
+  <script src="jokes.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

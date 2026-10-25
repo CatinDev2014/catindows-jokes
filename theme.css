@@ -1,0 +1,572 @@
+/* Устанавливаем цветовую схему */
+:root {
+  color-scheme: light dark;
+  
+  /* Светлая тема (палитра old-dos.ru) */
+  --bg-body: #ffffff;
+  --bg-panel: #ffffff;
+  --bg-header: #f0f0f0;
+  --bg-menu: #ffffff;
+  --bg-input: #ffffff;
+  --text-main: #323532;
+  --text-muted: #666666;
+  --border-color: #3a3a3a; /* Темно-серая рамка как у них */
+  --link-color: #6da3bd;   /* Тот самый голубой цвет ссылок */
+  --link-hover: #00afff;
+  --accent: #000080;
+  --code-bg: #f4f4f4;
+  --joke-border: #cccccc;
+}
+
+/* Тёмная тема */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-body: #1e1e1e;
+    --bg-panel: #252526;
+    --bg-header: #2d2d2d;
+    --bg-menu: #333333;
+    --bg-input: #1a1a1a;
+    --text-main: #cccccc;
+    --text-muted: #888888;
+    --border-color: #555555;
+    --link-color: #6da3bd;
+    --link-hover: #00afff;
+    --accent: #569cd6;
+    --code-bg: #1a1a1a;
+    --joke-border: #444444;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Tahoma", "Verdana", sans-serif;
+  font-size: 13px;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Растягиваем на весь экран */
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+a:hover { 
+  color: var(--link-hover);
+  text-decoration: underline; 
+}
+
+/* Обертка для прижатия подвала к низу */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  flex-grow: 1; /* Занимает все свободное место */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Шапка */
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.logo {
+  font-family: "Impact", "Arial Black", sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  margin-right: 20px;
+  line-height: 1;
+  transform: rotate(-5deg);
+}
+.logo-d { color: #cc0000; }
+.logo-o { color: #cccc00; }
+.logo-s { color: #0000cc; }
+.logo-text { 
+  font-size: 16px; 
+  color: var(--text-main); 
+  margin-left: 10px;
+  transform: rotate(0deg);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.site-title h1 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--text-main);
+  font-weight: bold;
+}
+.site-title p {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Верхнее меню (плоское, как ссылки) */
+.top-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.top-menu a {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--link-color);
+}
+.top-menu a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* Макет */
+.main-layout {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  flex-grow: 1; /* Контент тянется вниз */
+}
+
+/* Сайдбар */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.sidebar-block {
+  margin-bottom: 10px;
+}
+
+.sidebar-title {
+  font-weight: bold;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-content {
+  padding: 0;
+}
+
+.sidebar-content input {
+  width: 100%;
+  padding: 4px;
+  margin-bottom: 5px;
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-main);
+}
+
+.sidebar-content button {
+  width: 100%;
+  padding: 4px;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background: var(--bg-menu);
+  color: var(--text-main);
+}
+
+.sidebar-content button:hover {
+  background: var(--bg-header);
+}
+
+/* Теги */
+#tags {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tag-btn {
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--link-color);
+  font-family: inherit;
+  font-size: 12px;
+}
+.tag-btn:hover { text-decoration: underline; color: var(--link-hover); }
+.tag-btn.active { font-weight: bold; color: var(--text-main); }
+
+/* Контент */
+.content {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.content-header {
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 10px;
+}
+
+.content-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.jokes-list {
+  padding: 0;
+}
+
+.joke {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid var(--joke-border);
+  background: var(--bg-panel);
+  line-height: 1.5;
+}
+
+.joke:hover {
+  border-color: var(--border-color);
+}
+
+.joke p {
+  margin: 0 0 6px 0;
+}
+
+.joke p:last-child {
+  margin-bottom: 0;
+}
+
+.joke code {
+  background: var(--code-bg);
+  padding: 1px 4px;
+  border: 1px solid var(--border-color);
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+}
+
+.joke-tags {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.joke-tags span {
+  margin-right: 6px;
+}
+
+.joke.highlight {
+  border: 2px dashed var(--link-hover);
+}
+
+/* Подвал */
+.footer {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0; /* Не дает подвалу сжаться */
+}
+
+.footer code {
+  background: var(--code-bg);
+  padding: 0 3px;
+}
+
+/* Адаптивность для мобилок */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+  }
+  #tags {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .logo {
+    font-size: 24px;
+  }
+}
+
+/* Стили для верхнего меню (вкладки) */
+.top-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--border-color); /* Более жирная линия снизу */
+}
+
+.top-menu a {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--link-color);
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  position: relative;
+  bottom: -7px; /* Прижимаем к нижней линии */
+}
+
+.top-menu a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* Активная вкладка */
+.top-menu a.active {
+  color: var(--text-main);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-bottom: 2px solid var(--bg-panel); /* Перекрываем нижнюю линию */
+  text-decoration: none;
+  cursor: default;
+}
+
+/* Стили для модального окна */
+.modal-overlay {
+  display: none; /* Скрыто по умолчанию */
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Затемнение без размытия */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay.active {
+  display: flex; /* Показываем при активации */
+}
+
+.modal-content {
+  background: var(--bg-panel);
+  border: 2px solid var(--border-color);
+  border-right-color: var(--border-light);
+  border-bottom-color: var(--border-light);
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-header);
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--text-main);
+  padding: 0 5px;
+}
+
+.modal-close:hover {
+  color: var(--link-color);
+}
+
+.modal-body {
+  padding: 10px;
+}
+
+.modal-body textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-main);
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.modal-body input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-main);
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  padding: 10px;
+  background: var(--bg-header);
+  border-top: 1px solid var(--border-color);
+  text-align: right;
+}
+
+.modal-footer button {
+  padding: 5px 15px;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background: var(--bg-menu);
+  color: var(--text-main);
+}
+
+.modal-footer button:hover {
+  background: var(--bg-panel);
+}
+
+/* Убегающая кнопка */
+.runaway-btn {
+  padding: 8px 16px;
+  background: #cc0000;
+  color: #ffffff;
+  border: 2px solid #990000;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative; /* По умолчанию в потоке, но при клике станет fixed */
+  transition: transform 0.1s ease-out;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+}
+
+/* При наведении немного отодвигается (эффект замаха) */
+.runaway-btn:hover {
+  transform: translateX(10px) translateY(-5px);
+  background: #ff0000;
+}
+
+/* Класс для телепортации (добавляется через JS) */
+.runaway-btn.teleported {
+  position: fixed;
+  z-index: 9999;
+  transition: top 0.2s ease-out, left 0.2s ease-out;
+}
+
+/* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
+@media (max-width: 768px) {
+  /* Основной макет становится вертикальным */
+  .main-layout {
+    flex-direction: column;
+  }
+  
+  /* Сайдбар растягивается на всю ширину */
+  .sidebar {
+    width: 100%;
+  }
+  
+  /* Теги выстраиваются в ряд, чтобы не занимать пол-экрана */
+  #tags {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  /* Кнопки тегов делаем чуть крупнее для пальцев */
+  .tag-btn {
+    padding: 6px 10px;
+    background: var(--bg-header);
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* Верхнее меню тоже переносим и делаем удобнее */
+  .top-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .top-menu a {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  /* Шапку центрируем */
+  .header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .logo {
+    margin-right: 0;
+  }
+
+  /* Контент (шутки) занимает всю ширину */
+  .content {
+    width: 100%;
+  }
+
+  /* Чуть уменьшаем отступы в шутках */
+  .joke {
+    padding: 12px;
+  }
+
+  /* Модальное окно на телефоне */
+  .modal-content {
+    width: 95%;
+  }
+  
+  .modal-body textarea {
+    height: 150px;
+    font-size: 16px; /* Чтобы iOS не зумил при клике */
+  }
+
+  .modal-body input {
+    font-size: 16px;
+  }
+
+  /* Поле поиска тоже делаем крупнее */
+  .sidebar-content input {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  /* Убегающая кнопка на телефоне */
+  .runaway-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
+
+/* Для очень узких экранов (iPhone SE и т.д.) */
+@media (max-width: 400px) {
+  body {
+    padding: 5px;
+  }
+  
+  .container {
+    border-left: none;
+    border-right: none;
+  }
+
+  .joke-tags span {
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+}
